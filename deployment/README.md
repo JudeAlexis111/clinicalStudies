@@ -644,6 +644,8 @@ The following secrets which were in earlier versions are no longer being used as
 These secrets can be deleted from your deployment with the following steps. However, make sure you have a record of them handy before deleting, as these need to be updated in the Study Builder interface when [managing the apps](#manage-apps-in-the-study-builder)
 
 1. Update your repository with the latest changes from release 2.0.8 or greater, create a new working branch and make the following changes:
+configure-application-properties
+
 1. In the `deployment/terraform/kubernetes/main.tf` file, find the section `# Data sources from Secret Manager` and remove the following lines:
     - `manual-android-bundle-id`
     - `manual-android-server-key`
@@ -651,6 +653,7 @@ These secrets can be deleted from your deployment with the following steps. Howe
     - `manual-ios-certificate`
     - `manual-ios-certificate-password`
     - `manual-mobile-app-appid`
+Android-AndroidX-migrate
 1. In the file `deployment/terraform/{prefix}-{env}-secret/main.tf`, remove the following resources:
     -   ```
         resource "google_secret_manager_secret" "manual_mobile_app_appid" {
