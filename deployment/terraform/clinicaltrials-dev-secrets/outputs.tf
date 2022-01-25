@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-billing_account = "019606-8A86B6-CD7E5C"
-project_id      = "clinicaltrials-dev-devops"
-state_bucket    = "clinicaltrials-dev-terraform-state"
-terraform_root  = "deployment/terraform"
-build_viewers = [
-  "group:clinicaltrials-dev-cicd-viewers@clinicaltrials.mobi",
-]
+output "project_id" {
+  value = module.project.project_id
+}
+
+output "project_number" {
+  value = module.project.project_number
+}
