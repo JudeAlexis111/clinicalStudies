@@ -440,6 +440,10 @@ The deployment process takes the following approach:
            $PREFIX $ENV <YOUR_DESIRED_LOGIN_EMAIL> <YOUR_DESIRED_PASSWORD>
          ```
 
+### Configure Logging & Monitoring (optional)
+
+There are optional logging, monitoring, alerts, and notifications that can be configured for a deployment. See [`/documentation/monitoring.md`](/documentation/monitoring.md) for guidance on configuring this as well as recommended alert thresholds.
+
 ### Configure your first study
 
 1. Navigate your browser to `studies.{PREFIX}-{ENV}.{DOMAIN}/studybuilder/` (the trailing slash is necessary) and use the account credentials that you created with the `create_study_builder_superadmin.sh` script to log into the [`Study builder`](/study-builder/) user interface
@@ -640,6 +644,15 @@ The following secrets which were in earlier versions are no longer being used as
 These secrets can be deleted from your deployment with the following steps. However, make sure you have a record of them handy before deleting, as these need to be updated in the Study Builder interface when [managing the apps](#manage-apps-in-the-study-builder)
 
 1. Update your repository with the latest changes from release 2.0.8 or greater, create a new working branch and make the following changes:
+
+1. In the `deployment/terraform/kubernetes/main.tf` file, find the section `# Data sources from Secret Manager` and remove the following lines:
+    - `manual-android-bundle-id`
+    - `manual-android-server-key`
+    - `manual-ios-bundle-id`
+    - `manual-ios-certificate`
+    - `manual-ios-certificate-password`
+    - `manual-mobile-app-appid`
+
 1. In the file `deployment/terraform/{prefix}-{env}-secret/main.tf`, remove the following resources:
     -   ```
         resource "google_secret_manager_secret" "manual_mobile_app_appid" {
