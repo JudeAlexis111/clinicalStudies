@@ -19,7 +19,7 @@ terraform {
     google-beta = "~> 3.0"
   }
   backend "gcs" {
-    bucket = "example-dev-terraform-state"
+    bucket = "clinicaltrials-dev-terraform-state"
     prefix = "kubernetes"
   }
 }
@@ -27,9 +27,9 @@ terraform {
 data "google_client_config" "default" {}
 
 data "google_container_cluster" "gke_cluster" {
-  name     = "example-dev-gke-cluster"
-  location = "us-central1"
-  project  = "example-dev-apps"
+  name     = "clinicaltrials-dev-gke-cluster"
+  location = "us-west2"
+  project  = "clinicaltrials-dev-apps"
 }
 
 provider "kubernetes" {
@@ -80,7 +80,7 @@ locals {
 # Data sources from Secret Manager.
 data "google_secret_manager_secret_version" "secrets" {
   provider = google-beta
-  project  = "example-dev-secrets"
+  project  = "clinicaltrials-dev-secrets"
   secret   = each.key
 
   for_each = toset(concat(
@@ -124,13 +124,13 @@ resource "kubernetes_secret" "shared_secrets" {
   }
 
   data = {
-    consent_bucket_name               = "example-dev-mystudies-consent-documents"
-    study_resources_bucket_name       = "example-dev-mystudies-study-resources"
-    study_export_import_bucket_name   = "example-dev-mystudies-sql-import"
-    institution_resources_bucket_name = "example-dev-mystudies-institution-resources"
-    base_url                          = "https://participants.example-dev.example.com"
-    studies_base_url                  = "https://studies.example-dev.example.com"
-    firestore_project_id              = "example-dev-firebase"
+    consent_bucket_name               = "clinicaltrials-dev-mystudies-consent-documents"
+    study_resources_bucket_name       = "clinicaltrials-dev-mystudies-study-resources"
+    study_export_import_bucket_name   = "clinicaltrials-dev-mystudies-sql-import"
+    institution_resources_bucket_name = "clinicaltrials-dev-mystudies-institution-resources"
+    base_url                          = "https://participants.clinicaltrials-dev.clinicaltrials.mobi"
+    studies_base_url                  = "https://studies.clinicaltrials-dev.clinicaltrials.mobi"
+    firestore_project_id              = "clinicaltrials-dev-firebase"
     log_path                          = data.google_secret_manager_secret_version.secrets["manual-log-path"].secret_data
     org_name                          = data.google_secret_manager_secret_version.secrets["manual-org-name"].secret_data
     terms_url                         = data.google_secret_manager_secret_version.secrets["manual-terms-url"].secret_data
@@ -235,7 +235,7 @@ resource "kubernetes_secret" "email_credentials" {
 resource "google_service_account_key" "apps_service_account_keys" {
   for_each = toset(local.service_account_ids)
 
-  service_account_id = "${each.key}@example-dev-apps.iam.gserviceaccount.com"
+  service_account_id = "${each.key}@clinicaltrials-dev-apps.iam.gserviceaccount.com"
 }
 
 resource "kubernetes_secret" "apps_gcloud_keys" {
