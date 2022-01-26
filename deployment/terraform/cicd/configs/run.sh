@@ -19,11 +19,11 @@ set -ex
 MODULES=(
   devops
   audit
-  example-dev-secrets
-  example-dev-networks
-  example-dev-apps
-  example-dev-firebase
-  example-dev-data
+  clinicaltrials-dev-secrets
+  clinicaltrials-dev-networks
+  clinicaltrials-dev-apps
+  clinicaltrials-dev-firebase
+  clinicaltrials-dev-data
 )
 
 ACTIONS=()
