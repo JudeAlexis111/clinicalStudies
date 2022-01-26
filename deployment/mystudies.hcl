@@ -137,7 +137,7 @@ template "project_secrets" {
         },
         {
           secret_id = "manual-mystudies-contact-email-address"
-        },
+        },        
         {
           secret_id = "manual-mystudies-from-email-domain"
         },
@@ -996,12 +996,6 @@ data "google_secret_manager_secret_version" "secrets" {
       "manual-terms-url",
       "manual-privacy-url",
       "manual-fcm-api-url",
-      "manual-mobile-app-appid",
-      "manual-android-bundle-id",
-      "manual-android-server-key",
-      "manual-ios-bundle-id",
-      "manual-ios-certificate",
-      "manual-ios-certificate-password",
       "manual-ios-deeplink-url",
       "manual-android-deeplink-url",
       "auto-auth-server-encryptor-password",
